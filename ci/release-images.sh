@@ -17,7 +17,7 @@ trap cleanup EXIT
 
 git archive v1.0.0 | tar -x -C "$baseline"
 if [[ "$RELEASE_TARGET" == docker-hub ]]; then
-    if [[ ! "$DOCKERHUB_REPO" =~ ^[a-z0-9][a-z0-9_-]*/[a-z0-9][a-z0-9._-]*$ ]]; then
+    if [[ ! "${DOCKERHUB_REPO:-}" =~ ^[a-z0-9][a-z0-9_-]*/[a-z0-9][a-z0-9._-]*$ ]]; then
         echo 'Set DOCKERHUB_REPO to your Docker Hub namespace and repository.' >&2
         exit 2
     fi

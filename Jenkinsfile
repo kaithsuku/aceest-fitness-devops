@@ -7,21 +7,15 @@ pipeline {
     }
     triggers { pollSCM('H/5 * * * *') }
 
-    parameters {
-        choice(name: 'RELEASE_TARGET', choices: ['docker-hub', 'minikube'],
-               description: 'Publish and deploy from Docker Hub, or load images into local Minikube.')
-        string(name: 'DOCKERHUB_REPO', defaultValue: '',
-               description: 'Public Docker Hub repository in namespace/repository form.')
-        string(name: 'ACEEST_CONTEXT', defaultValue: 'aceest-coursework',
-               description: 'Name of the only context in the dedicated ACEest kubeconfig.')
-    }
-
     stages {
         stage('Clean checkout') {
             steps {
                 deleteDir()
                 checkout scm
                 script {
+                    if (!(env.RELEASE_TARGET in ['docker-hub', 'minikube'])) {
+                        error('Set RELEASE_TARGET to docker-hub or minikube in Jenkins node properties.')
+                    }
                     env.APP_VERSION = readFile('VERSION').trim()
                     def revision = sh(script: 'git rev-parse --short=12 HEAD', returnStdout: true).trim()
                     env.CANDIDATE_TAG = "${env.APP_VERSION}-${revision}"
@@ -63,7 +57,7 @@ pipeline {
             steps {
                 withCredentials([file(credentialsId: 'aceest-kubeconfig', variable: 'ACEEST_KUBECONFIG')]) {
                     script {
-                        if (params.RELEASE_TARGET == 'docker-hub') {
+                        if (env.RELEASE_TARGET == 'docker-hub') {
                             withCredentials([usernamePassword(credentialsId: 'aceest-dockerhub',
                                 usernameVariable: 'DOCKERHUB_USER', passwordVariable: 'DOCKERHUB_TOKEN')]) {
                                 sh 'bash ci/release-images.sh'
