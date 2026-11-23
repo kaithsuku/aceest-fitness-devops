@@ -8,7 +8,7 @@ COPY ACEest_Fitness.py app.py VERSION ./
 COPY templates/ templates/
 
 FROM base AS test
-COPY requirements-dev.txt ./
+COPY requirements-dev.txt .coveragerc ./
 RUN pip install --no-cache-dir -r requirements-dev.txt
 COPY tests/ tests/
 USER 10001:10001

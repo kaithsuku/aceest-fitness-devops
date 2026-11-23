@@ -1,0 +1,12 @@
+[run]
+relative_files = True
+source = .
+omit =
+    tests/*
+    reference/*
+    ci/*
+
+[report]
+include =
+    app.py
+    ACEest_Fitness.py
