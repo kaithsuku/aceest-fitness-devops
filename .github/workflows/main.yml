@@ -1,0 +1,26 @@
+name: ACEest Build and Test
+
+on: [push, pull_request]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v5.1.0
+        with:
+          persist-credentials: false
+      - name: Build and lint
+        run: |
+          docker build --target test -t aceest:test .
+          docker run --rm aceest:test sh -ec '
+            PYTHONPYCACHEPREFIX=/tmp/pycache python -m compileall -q app.py ACEest_Fitness.py tests
+            ruff check app.py ACEest_Fitness.py tests
+          '
+      - name: Assemble application image
+        run: docker build --target runtime -t aceest:ci .
+      - name: Run Pytest inside the image
+        run: bash ci/test-image.sh aceest:test
