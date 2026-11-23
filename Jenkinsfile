@@ -21,7 +21,7 @@ pipeline {
                     docker build --target test -t aceest-a1:test .
                     docker run --rm aceest-a1:test sh -ec '
                         PYTHONPYCACHEPREFIX=/tmp/pycache python -m compileall -q app.py ACEest_Fitness.py tests
-                        ruff check app.py ACEest_Fitness.py tests
+                        ruff check --no-cache app.py ACEest_Fitness.py tests
                     '
                     docker build --target runtime -t aceest-a1:build .
                     mkdir -p reports

@@ -45,4 +45,4 @@ GitHub Actions runs on every push and pull request. It builds the test environme
 
 For Jenkins, create a **Pipeline** job. Select **Pipeline script from SCM** and Git. Enter the GitHub URL, choose the `assignment-1` branch (or `main` in an Assignment 1-only repository), and set the script path to `Jenkinsfile`. Use a trusted Unix agent with label `docker` and working Git, Bash, and Docker. Install the Pipeline, Git, JUnit, and Timestamper plugins. Select **Build Now** once to register the Jenkinsfile triggers. Jenkins polls the branch about every five minutes, cleans the workspace, checks out the commit, builds both images, runs the tests, and records the image ID and test results.
 
-The immutable Git tag for this hand-in is `v1.0.0`. The `assignment-1` branch points to the same snapshot. Use the branch URL when both assignments share a GitHub repository.
+The immutable app release tag is `v1.0.0`. The `assignment-1` branch contains this release and its CI verification updates. Use the branch URL when both assignments share a GitHub repository.

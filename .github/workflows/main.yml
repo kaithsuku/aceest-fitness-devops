@@ -1,6 +1,9 @@
 name: ACEest Build and Test
 
-on: [push, pull_request]
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -18,7 +21,7 @@ jobs:
           docker build --target test -t aceest:test .
           docker run --rm aceest:test sh -ec '
             PYTHONPYCACHEPREFIX=/tmp/pycache python -m compileall -q app.py ACEest_Fitness.py tests
-            ruff check app.py ACEest_Fitness.py tests
+            ruff check --no-cache app.py ACEest_Fitness.py tests
           '
       - name: Assemble application image
         run: docker build --target runtime -t aceest:ci .
