@@ -1,0 +1,17 @@
+{
+  "project": "aceest-fitness",
+  "analysis_id": "1f67b51c-8aad-4e4b-a1f2-f44648393df3",
+  "analysis_date": "2026-11-23T10:34:34+0000",
+  "quality_gate": {
+    "status": "OK",
+    "conditions": [],
+    "ignoredConditions": false,
+    "caycStatus": "compliant"
+  },
+  "measures": {
+    "coverage": "100.0",
+    "duplicated_lines_density": "0.0",
+    "ncloc": "103",
+    "violations": "1"
+  }
+}
