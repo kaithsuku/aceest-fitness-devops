@@ -11,4 +11,14 @@
   <h2 id="nutrition-title">Nutrition plan</h2>
   <p class="plan">{{ program.nutrition }}</p>
 </section>
+<section aria-labelledby="estimate-title">
+  <h2 id="estimate-title">Calorie estimate</h2>
+  <form method="get">
+    <label for="weight">Weight in kg</label>
+    <input id="weight" name="weight_kg" type="number" min="0.01" max="500" step="any" value="{{ weight or '' }}" required>
+    <button type="submit">Calculate</button>
+  </form>
+  {% if result is not none %}<p><strong>{{ result }} kcal per day</strong></p>{% endif %}
+  {% if error %}<p role="alert">{{ error }}</p>{% endif %}
+</section>
 {% endblock %}
