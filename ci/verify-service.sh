@@ -7,7 +7,7 @@ log=$(mktemp)
 # An omitted local port asks kubectl for a free loopback port.
 "${KUBE[@]}" --namespace aceest port-forward "service/aceest-$1" :8000 >"$log" 2>&1 &
 forward=$!
-trap 'kill "$forward" 2>/dev/null || true; rm -f "$log"' EXIT
+trap 'kill "$forward" 2>/dev/null || true; wait "$forward" 2>/dev/null || true; rm -f "$log"' EXIT
 for ((attempt = 0; attempt < 25; attempt++)); do
     port=$(sed -n 's/.*127\.0\.0\.1:\([0-9][0-9]*\) ->.*/\1/p' "$log")
     if [[ -n "$port" ]]; then

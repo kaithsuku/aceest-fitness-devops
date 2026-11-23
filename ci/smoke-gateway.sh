@@ -6,7 +6,7 @@ source ci/kube.sh
 log=$(mktemp)
 "${KUBE[@]}" --namespace aceest port-forward service/aceest-gateway :8080 >"$log" 2>&1 &
 forward=$!
-trap 'kill "$forward" 2>/dev/null || true; rm -f "$log"' EXIT
+trap 'kill "$forward" 2>/dev/null || true; wait "$forward" 2>/dev/null || true; rm -f "$log"' EXIT
 port=
 for ((attempt = 0; attempt < 25; attempt++)); do
     port=$(sed -n 's/.*127\.0\.0\.1:\([0-9][0-9]*\) ->.*/\1/p' "$log")
