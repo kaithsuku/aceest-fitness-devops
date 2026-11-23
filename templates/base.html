@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}ACEest Fitness &amp; Gym{% endblock %}</title>
+  <style>
+    body { font: 1rem/1.55 system-ui, sans-serif; color: #222823; background: #f6f7f1; }
+    main { max-width: 44rem; margin: 3rem auto; padding: 0 1.1rem; }
+    h1 { font-size: clamp(1.8rem, 5vw, 2.7rem); line-height: 1.15; }
+    a { color: #175643; }
+    section { background: white; border: 1px solid #dce1d7; border-radius: .5rem;
+              padding: .5rem 1.1rem; margin: 1rem 0; }
+    .plan { white-space: pre-line; }
+    footer { color: #4d5751; margin-top: 2rem; }
+  </style>
+</head>
+<body>
+<main>
+  {% block content %}{% endblock %}
+  <footer>ACEest Fitness &amp; Gym · Version {{ version }}</footer>
+</main>
+</body>
+</html>

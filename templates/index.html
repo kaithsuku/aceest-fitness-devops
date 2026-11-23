@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>ACEest Fitness &amp; Gym</h1>
+<section aria-labelledby="programs-title">
+  <h2 id="programs-title">Fitness programs</h2>
+  <ul>
+    {% for program in programs %}
+    <li><a href="./programs/{{ program.code }}">{{ program.name }}</a></li>
+    {% endfor %}
+  </ul>
+</section>
+{% endblock %}

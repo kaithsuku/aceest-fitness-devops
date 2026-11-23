@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}{{ program.name }} | ACEest Fitness &amp; Gym{% endblock %}
+{% block content %}
+<nav><a href="../">All programs</a></nav>
+<h1>{{ program.name }}</h1>
+<section aria-labelledby="workout-title">
+  <h2 id="workout-title">Weekly workout</h2>
+  <p class="plan">{{ program.workout }}</p>
+</section>
+<section aria-labelledby="nutrition-title">
+  <h2 id="nutrition-title">Nutrition plan</h2>
+  <p class="plan">{{ program.nutrition }}</p>
+</section>
+{% endblock %}
