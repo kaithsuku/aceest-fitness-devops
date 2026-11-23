@@ -17,7 +17,7 @@ python -m flask --app app run
 
 Open <http://127.0.0.1:5000>. The API lists the programs at `/api/programs`. To see one program, use `/api/programs/fl`, `/api/programs/mg`, or `/api/programs/bg`. Use `/healthz` for service health and `/version` for the release number.
 
-On Windows PowerShell, use `py -3.12 -m venv .venv` and `..venv\Scripts\Activate.ps1`. Docker and Jenkins commands use a POSIX shell.
+On Windows PowerShell, use `py -3.12 -m venv .venv` and `.\.venv\Scripts\Activate.ps1`. Docker and Jenkins commands use a POSIX shell.
 
 ## Run tests
 
