@@ -30,7 +30,7 @@ pipeline {
                     docker build --target test -t "$TEST_IMAGE" .
                     docker run --rm "$TEST_IMAGE" sh -ec '
                         PYTHONPYCACHEPREFIX=/tmp/pycache python -m compileall -q app.py ACEest_Fitness.py tests
-                        ruff check app.py ACEest_Fitness.py tests
+                        ruff check --no-cache app.py ACEest_Fitness.py tests
                     '
                     bash ci/test-image.sh "$TEST_IMAGE"
                 '''
