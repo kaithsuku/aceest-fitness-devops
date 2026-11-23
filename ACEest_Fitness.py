@@ -48,3 +48,19 @@ PROGRAMS = {
         "Protein: 120g/day",
     ),
 }
+
+
+# Multipliers from the supplied Aceestver-1.1.py.
+CALORIE_FACTORS = {"fl": 22, "mg": 35, "bg": 26}
+
+
+def estimate_calories(code, weight_text):
+    """Return the demo nutrition estimate for a valid weight in kilograms."""
+    message = "Enter a weight greater than 0 kg and at most 500 kg."
+    try:
+        weight = float(weight_text)
+    except (TypeError, ValueError) as exc:
+        raise ValueError(message) from exc
+    if not 0 < weight <= 500:
+        raise ValueError(message)
+    return {"program": code, "weight_kg": weight, "estimated_kcal_per_day": round(weight * CALORIE_FACTORS[code])}
